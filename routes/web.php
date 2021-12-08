@@ -16,19 +16,24 @@ use Illuminate\Support\Facades\Http;
 
 Route::get('coin', function(){
     $coin =  Http::get('https://api.coingecko.com/api/v3/coins/cryptocars/')->object();
-
+    $coin2 =  Http::get('https://api.coingecko.com/api/v3/coins/binancecoin/')->object();
     $id = $coin->id;
     $symbol = $coin->symbol;
     $name = $coin->name;
     $brl = $coin->market_data->current_price->brl;
     $bnb = $coin->market_data->current_price->bnb;
+    $bnbToBrl = $coin2->market_data->current_price->brl;
+
+    $convert = $bnbToBrl * $bnb;
 
     $lastUpdated = date('d-m-Y H:i', strtotime($coin->last_updated));
 
     $moeda = [
                 'BRL' => [$name, $symbol, $brl, $lastUpdated],
-                'BNB' => [$name, $symbol, $bnb, $lastUpdated]
+                'BNB' => [$name, $symbol, $bnb, $lastUpdated],
+                'BNB_TO_BRL' => $convert
             ];
+
 
 
     //$token = '5013620342:AAHzzRR7B7dAI1eD0oWE8ZjZd5LxW53EV08'; //token Yuri
@@ -38,7 +43,7 @@ Route::get('coin', function(){
     //$chatId = '615312356'; //telegram Icaro
     $chatId = '-663151197';//grupo pushcoin
     //$getChatId = Http::get("https://api.telegram.org/bot{$token}/getUpdates");
-    $sendMessage = Http::get("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chatId}&text=Token = {$name}\nSimbolo = {$symbol}\nBRL = {$brl}\nBNB = {$bnb}\nAtualizado em = {$lastUpdated}");
+    $sendMessage = Http::get("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chatId}&text=Token = {$name}\nSimbolo = {$symbol}\nBRL = {$brl}\nBNB = {$bnb}\nBNB para BRL = {$convert}\nAtualizado em = {$lastUpdated}");
 
 
     return response()->json($moeda);
