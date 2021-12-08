@@ -43,7 +43,7 @@ Route::get('coin', function(){
     //$chatId = '615312356'; //telegram Icaro
     $chatId = '-663151197';//grupo pushcoin
     //$getChatId = Http::get("https://api.telegram.org/bot{$token}/getUpdates");
-    $sendMessage = Http::get("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chatId}&text=Token = {$name}\nSimbolo = {$symbol}\nBRL = {$brl}\nBNB = {$bnb}\nBNB para BRL = {$convert}\nAtualizado em = {$lastUpdated}");
+    $sendMessage = Http::get("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chatId}&text=Token = {$name}\nSimbolo = {$symbol}\nBRL = {$brl}\nBNB = {$bnb}\nCCAR -> BNB -> BRL = {$convert}\nAtualizado em = {$lastUpdated}");
 
 
     return response()->json($moeda);
