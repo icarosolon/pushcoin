@@ -25,9 +25,13 @@ Route::get('coin', function(){
 
     $moeda = [$name, $symbol, $brl, $lastUpdated];
 
-    $token = '5013620342:AAHzzRR7B7dAI1eD0oWE8ZjZd5LxW53EV08';
-    $chatId = '1119471058';
-    $message = "Mensagem de teste";
+
+    //$token = '5013620342:AAHzzRR7B7dAI1eD0oWE8ZjZd5LxW53EV08'; //token Yuri
+    //$chatId = '1119471058'; //telegram Yuri
+
+    $token = '1140021184:AAFrE0GLb6bjftlNfQ5jf06vUaNLuNQfU3Q'; //token Icaro
+    //$chatId = '615312356'; //telegram Icaro
+    $chatId = '-663151197';//grupo pushcoin
     //$getChatId = Http::get("https://api.telegram.org/bot{$token}/getUpdates");
     $sendMessage = Http::get("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chatId}&text=Token = {$name}\nSimbolo = {$symbol}\nBRL = {$brl}\nAtualizado em = {$lastUpdated}");
 
