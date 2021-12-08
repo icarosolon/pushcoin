@@ -31,7 +31,7 @@ Route::get('coin', function(){
     $moeda = [
                 'BRL' => [$name, $symbol, $brl, $lastUpdated],
                 'BNB' => [$name, $symbol, $bnb, $lastUpdated],
-                'BNB_TO_BRL' => $convert
+                'CCAR->BNB->BRL' => $convert
             ];
 
 
