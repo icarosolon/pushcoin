@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\TelegramNotify;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
 
@@ -29,8 +30,8 @@ Route::get('coin', function(){
     $lastUpdated = date('d-m-Y H:i', strtotime($coin->last_updated));
 
     $moeda = [
-                'BRL' => [$name, $symbol, $brl, $lastUpdated],
-                'BNB' => [$name, $symbol, $bnb, $lastUpdated],
+                'CCAR->BRL' => [$name, $symbol, $brl, $lastUpdated],
+                'CCAR->BNB' => [$name, $symbol, $bnb, $lastUpdated],
                 'CCAR->BNB->BRL' => $convert
             ];
 
@@ -43,7 +44,8 @@ Route::get('coin', function(){
     //$chatId = '615312356'; //telegram Icaro
     $chatId = '-663151197';//grupo pushcoin
     //$getChatId = Http::get("https://api.telegram.org/bot{$token}/getUpdates");
-    $sendMessage = Http::get("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chatId}&text=Token = {$name}\nSimbolo = {$symbol}\nBRL = {$brl}\nBNB = {$bnb}\nCCAR -> BNB -> BRL = {$convert}\nAtualizado em = {$lastUpdated}");
+    $message = "Token = {$name}\nSimbolo = {$symbol}\nCCAR -> BRL = {$brl}\nCCAR -> BNB = {$bnb}\nCCAR -> BNB -> BRL = {$convert}\nAtualizado em = {$lastUpdated}";
+    $sendMessage = Http::get("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chatId}&text={$message}");
 
 
     return response()->json($moeda);
@@ -53,5 +55,7 @@ Route::get('coin', function(){
 });
 
 Route::get('/', function () {
+
+    TelegramNotify::dispatch();
     return view('welcome');
 });
