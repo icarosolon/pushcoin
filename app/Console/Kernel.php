@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //Agendamento de tarefa para notificação pelo telegram
-        $schedule->job(TelegramNotify::dispatch())->everyMinute();
+        $schedule->job(TelegramNotify::dispatch())->everyFiveMinutes();
     }
 
     /**
