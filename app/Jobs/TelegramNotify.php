@@ -71,7 +71,7 @@ class TelegramNotify  //implements ShouldQueue
             //$chatId = '615312356'; //telegram Icaro
             $chatId = '-663151197';//grupo pushcoin
             //$getChatId = Http::get("https://api.telegram.org/bot{$token}/getUpdates");
-            $message = "{$status} {$name} - {$symbol} {$status}\nVariação BRL: {$variationBrl}\nCCAR -> BRL = {$brl}\nAtualizado em = {$lastUpdated}";
+            $message = "{$status} {$name} - {$symbol} {$status}\nVariação BRL 24H: {$variationBrl}\nCCAR -> BRL = {$brl}\nAtualizado em = {$lastUpdated}";
             $sendMessage = Http::get("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chatId}&text={$message}");
 
         }
